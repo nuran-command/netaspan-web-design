@@ -35,7 +35,7 @@ const DivingAtmosphere = ({ scrollY }: { scrollY: any }) => {
       img: (i % 4) + 4,
       range: [journeyStart, journeyStart + duration],
       driftSpeed: getStableValue(seed + 4, 30, 60),
-      driftDir: i % 2 === 0 ? 1 : -1,
+      driftDir: 1,
       scale: getStableValue(seed + 5, 0.8, 1.2)
     };
   }), []);
@@ -172,8 +172,12 @@ export default function Home() {
   // Localized Cloud Parallaxes
   const cloudAboutY1 = useTransform(scrollY, [6000, 8000], [0, -200]);
   const cloudAboutY2 = useTransform(scrollY, [6000, 8000], [0, -400]);
+  const cloudAboutY3 = useTransform(scrollY, [6000, 8000], [0, -600]);
+
   const cloudContactY1 = useTransform(scrollY, [8000, 10000], [0, -300]);
   const cloudContactY2 = useTransform(scrollY, [8000, 10000], [0, -150]);
+  const cloudContactY3 = useTransform(scrollY, [8000, 10000], [0, -500]);
+  const cloudContactY4 = useTransform(scrollY, [8000, 10000], [0, -700]);
 
   // Removed fixed scroll hooks for about - will use whileInView for smoother transition
 
@@ -218,18 +222,32 @@ export default function Home() {
         </div>
 
         <section className="relative min-h-screen flex flex-col items-center justify-center py-64 bg-transparent overflow-hidden">
-          {/* Decorative Clouds */}
+          {/* Decorative Clouds: LAYERED BACKGROUND */}
           <motion.div
             style={{ y: cloudAboutY1 }}
-            className="absolute top-0 left-[-10%] w-[600px] h-[600px] opacity-30 pointer-events-none"
+            className="absolute top-0 left-[-15%] w-[1200px] h-[900px] opacity-20 pointer-events-none"
           >
-            <Image src="/images/cloud6.webp" alt="" fill className="object-contain" />
+            <div className="w-[200%] h-full flex" style={{ animation: 'drift 200s linear infinite' }}>
+              {[0, 1].map(i => <div key={i} className="flex-1 relative h-full"><Image src="/images/cloud4.webp" alt="" fill className="object-contain" /></div>)}
+            </div>
           </motion.div>
           <motion.div
             style={{ y: cloudAboutY2 }}
-            className="absolute bottom-[-10%] right-[-5%] w-[800px] h-[800px] opacity-20 pointer-events-none grayscale brightness-150"
+            className="absolute bottom-[-10%] right-[-10%] w-[1500px] h-[1100px] opacity-15 pointer-events-none grayscale brightness-150"
           >
-            <Image src="/images/cloud4.webp" alt="" fill className="object-contain" />
+            <div className="w-[200%] h-full flex" style={{ animation: 'drift 180s linear infinite' }}>
+              {[0, 1].map(i => <div key={i} className="flex-1 relative h-full"><Image src="/images/cloud6.webp" alt="" fill className="object-contain" /></div>)}
+            </div>
+          </motion.div>
+
+          {/* ADDED LAYERED CLOUDS (FOREGROUND - OVERLAPS TEXT) */}
+          <motion.div
+            style={{ y: cloudAboutY3 }}
+            className="absolute top-[10%] right-[10%] w-[1000px] h-[800px] opacity-25 z-40 pointer-events-none"
+          >
+            <div className="w-[200%] h-full flex" style={{ animation: 'drift 120s linear infinite' }}>
+              {[0, 1].map(i => <div key={i} className="flex-1 relative h-full"><Image src="/images/cloud5.webp" alt="" fill className="object-contain brightness-125" /></div>)}
+            </div>
           </motion.div>
 
           <motion.div
@@ -262,18 +280,41 @@ export default function Home() {
         </section>
         {/* CONTACT SECTION: THE STACKING REVEAL */}
         <section className="relative h-[150vh] flex flex-col items-center justify-center bg-transparent overflow-hidden">
-          {/* Section Clouds */}
+          {/* Section Clouds: LAYERED BACKGROUND */}
           <motion.div
             style={{ y: cloudContactY1, scale: 1.2 }}
-            className="absolute top-[-10%] right-[-10%] w-[1000px] h-[1000px] opacity-20 pointer-events-none"
+            className="absolute top-[-15%] right-[-15%] w-[1400px] h-[1100px] opacity-20 pointer-events-none"
           >
-            <Image src="/images/cloud6.webp" alt="" fill className="object-contain" />
+            <div className="w-[200%] h-full flex" style={{ animation: 'drift 220s linear infinite' }}>
+              {[0, 1].map(i => <div key={i} className="flex-1 relative h-full"><Image src="/images/cloud6.webp" alt="" fill className="object-contain" /></div>)}
+            </div>
           </motion.div>
           <motion.div
             style={{ y: cloudContactY2 }}
-            className="absolute bottom-[5%] left-[-15%] w-[800px] h-[800px] opacity-15 pointer-events-none blur-sm"
+            className="absolute bottom-[0%] left-[-20%] w-[1200px] h-[900px] opacity-15 pointer-events-none blur-sm"
           >
-            <Image src="/images/cloud7.webp" alt="" fill className="object-contain" />
+            <div className="w-[200%] h-full flex" style={{ animation: 'drift 190s linear infinite' }}>
+              {[0, 1].map(i => <div key={i} className="flex-1 relative h-full"><Image src="/images/cloud7.webp" alt="" fill className="object-contain" /></div>)}
+            </div>
+          </motion.div>
+
+          {/* ADDED LAYERED CLOUDS: FRONT OVERLAY (OVERLAPS TEXT) */}
+          <motion.div
+            style={{ y: cloudContactY3 }}
+            className="absolute top-[25%] left-[10%] w-[1300px] h-[1000px] opacity-35 z-40 pointer-events-none"
+          >
+            <div className="w-[200%] h-full flex" style={{ animation: 'drift 100s linear infinite' }}>
+              {[0, 1].map(i => <div key={i} className="flex-1 relative h-full"><Image src="/images/cloud4.webp" alt="" fill className="object-contain brightness-150" /></div>)}
+            </div>
+          </motion.div>
+
+          <motion.div
+            style={{ y: cloudContactY4 }}
+            className="absolute bottom-[-10%] right-[-15%] w-[1600px] h-[1100px] opacity-20 z-50 pointer-events-none"
+          >
+            <div className="w-[200%] h-full flex" style={{ animation: 'drift 140s linear infinite' }}>
+              {[0, 1].map(i => <div key={i} className="flex-1 relative h-full"><Image src="/images/cloud6.webp" alt="" fill className="object-contain" /></div>)}
+            </div>
           </motion.div>
 
           <div className="text-center px-6">

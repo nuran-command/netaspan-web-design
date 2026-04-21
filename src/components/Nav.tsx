@@ -26,7 +26,7 @@ export default function Nav() {
         <div className="hidden lg:flex items-center justify-evenly w-full px-4 text-[#FF9F1C]">
           <Link
             href="/"
-            className="text-2xl font-bold tracking-[-1px]"
+            className="text-2xl font-[900] tracking-[-0.05em] text-white uppercase italic"
           >
             Netaspan
           </Link>
