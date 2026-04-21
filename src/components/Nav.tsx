@@ -15,6 +15,13 @@ export default function Nav() {
 
   const menuItems = ["Projects", "About", "Contact"];
 
+  const handleNavClick = () => {
+    // Dispatch custom event for Mist-Sync transition
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("nav-burst"));
+    }
+  };
+
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
@@ -37,6 +44,7 @@ export default function Nav() {
             <Link
               key={item}
               href={`#${item.toLowerCase()}`}
+              onClick={handleNavClick}
               className="uppercase text-sm font-bold tracking-[2px] hover:text-white transition-colors duration-300 relative group"
             >
               {item}
@@ -78,7 +86,10 @@ export default function Nav() {
               <Link
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => {
+                  handleNavClick();
+                  setMobileMenuOpen(false);
+                }}
                 className="text-white text-xl font-bold uppercase tracking-[2px]"
               >
                 {item}

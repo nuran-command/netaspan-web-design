@@ -100,10 +100,19 @@ const MountainLayer = ({ src, y, opacity, zIndex, baseHeight, count, seedOffset,
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function Atmosphere({ opacity = 1 }: { opacity?: any }) {
   const [isMounted, setIsMounted] = useState(false);
+  const [isBursting, setIsBursting] = useState(false);
   const { scrollY } = useScroll();
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
+
+    const handleBurst = () => {
+      setIsBursting(true);
+      setTimeout(() => setIsBursting(false), 1200); // Reset after animation
+    };
+
+    window.addEventListener("nav-burst", handleBurst);
+    return () => window.removeEventListener("nav-burst", handleBurst);
   }, []);
 
   const yMntFar = useTransform(scrollY, [0, 4000], [1000, -100]);
@@ -116,6 +125,18 @@ export default function Atmosphere({ opacity = 1 }: { opacity?: any }) {
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <motion.div style={{ opacity } as unknown as any} className="fixed inset-0 w-full h-full z-0 pointer-events-none bg-[#0A2540] overflow-hidden transform-gpu">
+      {/* 1. MIST-SYNC BURST LAYER (zIndex 60) - Triggered by Nav */}
+      <motion.div
+        animate={{ 
+          opacity: isBursting ? 1 : 0,
+          scale: isBursting ? [1, 1.5, 2] : 1,
+        }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="absolute inset-x-0 inset-y-0 z-[60] pointer-events-none"
+      >
+        <GlobalCloudLayer scrollY={scrollY} speed={20} zIndex={60} scaleRange={[3, 5]} opacityRange={[0.6, 1]} yParallaxRange={[0, 0]} count={4} seedBase={555} topRange={[-10, 110]} />
+      </motion.div>
+
       {/* EXTREME DEEP BACK LAYER (zIndex 1) */}
       <GlobalCloudLayer scrollY={scrollY} speed={360} zIndex={1} scaleRange={[1.2, 2.2]} opacityRange={[0.08, 0.15]} yParallaxRange={[0, -400]} count={25} seedBase={50} topRange={[-300, 2000]} />
       
@@ -132,6 +153,11 @@ export default function Atmosphere({ opacity = 1 }: { opacity?: any }) {
       <GlobalCloudLayer scrollY={scrollY} speed={180} zIndex={5} scaleRange={[0.8, 1.5]} opacityRange={[0.2, 0.3]} yParallaxRange={[0, -1000]} count={5} seedBase={200} topRange={[50, 300]} />
       <GlobalCloudLayer scrollY={scrollY} speed={150} zIndex={15} scaleRange={[1.2, 2.0]} opacityRange={[0.1, 0.2]} yParallaxRange={[0, -1200]} count={6} seedBase={900} topRange={[300, 1200]} />
       <GlobalCloudLayer scrollY={scrollY} speed={120} zIndex={20} scaleRange={[1.5, 2.5]} opacityRange={[0.1, 0.2]} yParallaxRange={[0, -1500]} count={3} seedBase={700} topRange={[200, 800]} />
+
+      {/* NEW MID-ALTITUDE LAYERS (Spanning all pages) */}
+      <GlobalCloudLayer scrollY={scrollY} speed={150} zIndex={28} scaleRange={[1.0, 1.8]} opacityRange={[0.12, 0.22]} yParallaxRange={[0, -900]} count={10} seedBase={444} topRange={[-100, 1800]} />
+      <GlobalCloudLayer scrollY={scrollY} speed={110} zIndex={32} scaleRange={[1.3, 2.0]} opacityRange={[0.08, 0.15]} yParallaxRange={[0, -1300]} count={8} seedBase={333} topRange={[200, 2000]} />
+
       <div className="absolute inset-x-0 bottom-0 h-[50vh] bg-gradient-to-t from-[#0A2540] to-transparent z-50 pointer-events-none" />
     </motion.div>
   );
