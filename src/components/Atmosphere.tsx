@@ -116,8 +116,11 @@ export default function Atmosphere({ opacity = 1 }: { opacity?: any }) {
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <motion.div style={{ opacity } as unknown as any} className="fixed inset-0 w-full h-full z-0 pointer-events-none bg-[#0A2540] overflow-hidden transform-gpu">
-      <GlobalCloudLayer scrollY={scrollY} speed={280} zIndex={4} scaleRange={[0.5, 1.0]} opacityRange={[0.08, 0.15]} yParallaxRange={[0, -600]} count={12} seedBase={800} topRange={[-100, 1000]} />
-      <GlobalCloudLayer scrollY={scrollY} speed={240} zIndex={2} scaleRange={[0.6, 1.2]} opacityRange={[0.1, 0.2]} yParallaxRange={[0, -500]} count={6} seedBase={100} topRange={[-10, 400]} />
+      {/* EXTREME DEEP BACK LAYER (zIndex 1) */}
+      <GlobalCloudLayer scrollY={scrollY} speed={360} zIndex={1} scaleRange={[1.2, 2.2]} opacityRange={[0.08, 0.15]} yParallaxRange={[0, -400]} count={25} seedBase={50} topRange={[-300, 2000]} />
+      
+      <GlobalCloudLayer scrollY={scrollY} speed={280} zIndex={4} scaleRange={[0.8, 1.8]} opacityRange={[0.1, 0.2]} yParallaxRange={[0, -600]} count={24} seedBase={800} topRange={[-100, 1500]} />
+      <GlobalCloudLayer scrollY={scrollY} speed={240} zIndex={2} scaleRange={[0.9, 1.6]} opacityRange={[0.12, 0.24]} yParallaxRange={[0, -500]} count={18} seedBase={100} topRange={[-50, 1000]} />
 
       <MountainLayer src="/images/mountain1.webp" y={yMntFar} opacity={mntOpacity} zIndex={10} baseHeight={30} count={5} seedOffset={100} sizeRange={[0.8, 1.3]} brightnessRange={[0.6, 0.9]} />
 

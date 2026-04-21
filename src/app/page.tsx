@@ -214,14 +214,14 @@ export default function Home() {
           </motion.section>
         </div>
 
-        <div className="relative py-[20vh] space-y-[20vh]">
+        <div id="projects" className="relative py-[20vh] space-y-[20vh]">
           <ProjectIsland num="01" category="Architectural" title="Nordic Peak" side="left" />
           <ProjectIsland num="02" category="Cinematic" title="Aura Labs" side="right" />
           <ProjectIsland num="03" category="Interactive" title="Digital Soul" side="left" />
           <ProjectIsland num="04" category="Branding" title="Netaspan Core" side="right" />
         </div>
 
-        <section className="relative min-h-screen flex flex-col items-center justify-center py-64 bg-transparent overflow-hidden">
+        <section id="about" className="relative min-h-screen flex flex-col items-center justify-center py-64 bg-transparent overflow-hidden">
           {/* Decorative Clouds: LAYERED BACKGROUND */}
           <motion.div
             style={{ y: cloudAboutY1 }}
@@ -279,7 +279,7 @@ export default function Home() {
           </div>
         </section>
         {/* CONTACT SECTION: THE STACKING REVEAL */}
-        <section className="relative h-[150vh] flex flex-col items-center justify-center bg-transparent overflow-hidden">
+        <section id="contact" className="relative h-[150vh] flex flex-col items-center justify-center bg-transparent overflow-hidden">
           {/* Section Clouds: LAYERED BACKGROUND */}
           <motion.div
             style={{ y: cloudContactY1, scale: 1.2 }}
@@ -343,7 +343,7 @@ export default function Home() {
         </section>
 
         <section className="h-[20vh] flex items-center justify-center border-t border-white/5 opacity-20">
-          <span className="text-[10px] font-black tracking-[20px] uppercase">©2024 Netaspan Digital</span>
+          <span className="text-[10px] font-black tracking-[20px] uppercase">© 2026 Netaspan Digital</span>
         </section>
       </div>
     </main>

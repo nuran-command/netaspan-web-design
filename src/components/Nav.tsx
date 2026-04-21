@@ -13,6 +13,8 @@ export default function Nav() {
     setScrolled(latest > 100);
   });
 
+  const menuItems = ["Projects", "About", "Contact"];
+
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
@@ -23,15 +25,15 @@ export default function Nav() {
     >
       <div className="w-full">
         {/* DESKTOP: EVENLY SPACED ELEMENTS */}
-        <div className="hidden lg:flex items-center justify-evenly w-full px-4 text-[#FF9F1C]">
+        <div className="hidden lg:flex items-center justify-between w-full text-[#FF9F1C]">
           <Link
             href="/"
-            className="text-2xl font-[900] tracking-[-0.05em] text-white uppercase italic"
+            className="text-[#FF9F1C] text-2xl font-bold tracking-[-1px]"
           >
             Netaspan
           </Link>
 
-          {["Services", "Projects", "About", "Contact"].map((item) => (
+          {menuItems.map((item) => (
             <Link
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -58,37 +60,33 @@ export default function Nav() {
           </Link>
 
           <button
-            className="text-[#FF9F1C] p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="text-white p-2"
           >
             {mobileMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <motion.div
-        initial={false}
-        animate={{ height: mobileMenuOpen ? "auto" : 0, opacity: mobileMenuOpen ? 1 : 0 }}
-        className="lg:hidden overflow-hidden bg-[#0A2540]/95 backdrop-blur-lg absolute top-full left-0 w-full border-b border-white/10"
-      >
-        <div className="flex flex-col items-center py-8 gap-y-6">
-          {["Services", "Projects", "About", "Contact"].map((item) => (
-            <Link
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              onClick={() => setMobileMenuOpen(false)}
-              className="uppercase text-[#FF9F1C] text-lg font-medium tracking-[1.5px]"
-            >
-              {item}
-            </Link>
-          ))}
-          <button className="flex items-center mt-4 gap-1 border border-[#FF9F1C]/30 rounded-full px-6 py-2 uppercase text-[#FF9F1C] text-base font-medium tracking-[1px]">
-            EN
-            <ChevronDown className="w-4 h-4 ml-1" />
-          </button>
-        </div>
-      </motion.div>
+        {/* MOBILE OVERLAY */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute top-full left-0 w-full bg-[#0A2540] border-b border-white/10 flex flex-col p-8 gap-6 lg:hidden"
+          >
+            {menuItems.map((item) => (
+              <Link
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-white text-xl font-bold uppercase tracking-[2px]"
+              >
+                {item}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </div>
     </motion.nav>
   );
 }
