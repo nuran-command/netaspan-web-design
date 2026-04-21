@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Float, RoundedBox, Edges, Environment } from "@react-three/drei";
+import { Float, RoundedBox, Edges } from "@react-three/drei";
 import * as THREE from "three";
 
 function ServerModule({ position }: { position: [number, number, number] }) {

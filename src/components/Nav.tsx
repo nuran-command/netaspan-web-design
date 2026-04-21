@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -21,38 +21,44 @@ export default function Nav() {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 py-6 px-8 lg:px-12 ${scrolled ? "bg-[#0A2540]/60 backdrop-blur-md border-b border-white/5 py-4" : ""
         }`}
     >
-      <div className="flex items-center justify-between w-full">
-        {/* Left: Logo */}
-        <Link
-          href="/"
-          className="text-[#FF9F1C] text-2xl font-bold tracking-[-1px]"
-        >
-          Rottor
-        </Link>
+      <div className="w-full">
+        {/* DESKTOP: EVENLY SPACED ELEMENTS */}
+        <div className="hidden lg:flex items-center justify-evenly w-full px-4 text-[#FF9F1C]">
+          <Link
+            href="/"
+            className="text-2xl font-bold tracking-[-1px]"
+          >
+            Netaspan
+          </Link>
 
-        {/* Center: Desktop Menu */}
-        <div className="hidden lg:flex items-center gap-x-12 pr-4">
           {["Services", "Projects", "About", "Contact"].map((item) => (
             <Link
               key={item}
               href={`#${item.toLowerCase()}`}
-              className="uppercase text-[#FF9F1C] text-base font-bold tracking-[2px] hover:text-white transition-colors duration-300 relative group"
+              className="uppercase text-sm font-bold tracking-[2px] hover:text-white transition-colors duration-300 relative group"
             >
               {item}
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
-        </div>
 
-        {/* Right: Lang Picker & Hamburger */}
-        <div className="flex items-center gap-4">
-          <button className="hidden lg:flex items-center gap-1 border border-[#FF9F1C]/30 rounded-full px-4 py-1.5 uppercase text-[#FF9F1C] text-sm font-medium tracking-[1px] hover:bg-white/10 transition-colors duration-300">
+          <button className="flex items-center gap-1 border border-[#FF9F1C]/30 rounded-full px-4 py-1.5 uppercase text-sm font-medium tracking-[1px] hover:bg-white/10 transition-colors duration-300">
             EN
             <ChevronDown className="w-4 h-4 ml-1" />
           </button>
+        </div>
+
+        {/* MOBILE: LOGO + HAMBURGER */}
+        <div className="lg:hidden flex items-center justify-between w-full">
+          <Link
+            href="/"
+            className="text-[#FF9F1C] text-2xl font-bold tracking-[-1px]"
+          >
+            Netaspan
+          </Link>
 
           <button
-            className="lg:hidden text-[#FF9F1C] p-2"
+            className="text-[#FF9F1C] p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X /> : <Menu />}
