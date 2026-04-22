@@ -105,25 +105,25 @@ const ProjectIsland = ({ title, category, num, side = "left" }: { title: string;
     mouseY.set(0.5);
   };
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.3, 1, 1, 0.3]);
+  const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const scale = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.9, 1, 1, 0.9]);
 
   // Magnetic Typography
   const titleX = useTransform(smoothX, [0, 1], [-25, 25]);
   const titleY = useTransform(smoothY, [0, 1], [-25, 25]);
 
   return (
-    <div ref={ref} className={`relative h-[80vh] flex items-center ${side === "left" ? "justify-start pl-20" : "justify-end pr-20"} w-full`}>
+    <div ref={ref} className={`relative h-[70vh] sm:h-[80vh] flex items-center justify-center ${side === "left" ? "lg:justify-start lg:pl-20" : "lg:justify-end lg:pr-20"} w-full px-4 sm:px-8`}>
       <motion.div
         style={{ opacity, y, scale, transformStyle: "preserve-3d" }}
-        className="relative z-10"
+        className="relative z-10 w-full flex justify-center lg:block"
       >
         <motion.div
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-          className="relative group w-[500px] h-[300px] lg:w-[650px] lg:h-[380px] pointer-events-auto cursor-none lg:cursor-default"
+          className="relative group w-full max-w-[340px] sm:max-w-[480px] mx-auto lg:mx-0 h-[220px] sm:h-[290px] lg:w-[650px] lg:h-[380px] pointer-events-auto"
         >
           <div className="absolute inset-0 bg-[#0A2540]/90 border border-white/20 rounded-[48px] shadow-[0_40px_100px_rgba(0,0,0,0.4)] overflow-hidden">
             <motion.div
@@ -133,14 +133,14 @@ const ProjectIsland = ({ title, category, num, side = "left" }: { title: string;
 
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
 
-            <div className="absolute inset-0 p-12 flex flex-col justify-between">
+            <div className="absolute inset-0 p-6 sm:p-8 lg:p-12 flex flex-col justify-between">
               <div className="flex justify-between items-center">
                 <span className="text-[#FF9F1C] text-xs font-black tracking-[20px]">{num}</span>
                 <div className="h-px flex-1 mx-10 bg-white/10" />
               </div>
 
               <motion.div style={{ x: titleX, y: titleY, transformStyle: "preserve-3d" }}>
-                <h3 className="text-white text-4xl lg:text-[4.5vw] font-black tracking-tighter leading-none mb-6 drop-shadow-2xl">
+                <h3 className="text-white text-2xl sm:text-3xl lg:text-[4.5vw] font-black tracking-tighter leading-none mb-3 sm:mb-6 drop-shadow-2xl">
                   {title}
                 </h3>
                 <p className="text-[#FF9F1C] text-[10px] tracking-[10px] uppercase font-black">{category}</p>
@@ -221,7 +221,7 @@ export default function Home() {
           <ProjectIsland num="04" category="Branding" title="Netaspan Core" side="right" />
         </div>
 
-        <section id="about" className="relative min-h-screen flex flex-col items-center justify-center py-64 bg-transparent">
+        <section id="about" className="relative min-h-screen flex flex-col items-center justify-center py-24 sm:py-40 lg:py-64 bg-transparent">
           {/* Decorative Clouds: LAYERED BACKGROUND */}
           <motion.div
             style={{ y: cloudAboutY1 }}
@@ -321,7 +321,7 @@ export default function Home() {
             <AnimatedText
               text="Let's Build"
               gradientColors="linear-gradient(90deg, #FF9F1C, #FFFFFF, #FF9F1C)"
-              textClassName="text-7xl lg:text-[12vw] font-black tracking-tight italic uppercase"
+              textClassName="text-4xl sm:text-6xl lg:text-[12vw] font-black tracking-tight italic uppercase"
             />
             <motion.div
               initial={{ opacity: 0 }}
@@ -330,7 +330,7 @@ export default function Home() {
               className="mt-12 space-y-6"
             >
               <h4 className="text-white text-base lg:text-xl font-bold tracking-tight mb-2 italic">Global & Kazakhstan Operations</h4>
-              <p className="text-[#FF9F1C] text-xs font-black tracking-[8px] uppercase">netaspan.agency@gmail.com</p>
+              <p className="text-[#FF9F1C] text-xs font-black tracking-[3px] sm:tracking-[8px] uppercase break-all sm:break-normal">netaspan.agency@gmail.com</p>
 
               <div className="pt-12 flex flex-col items-center gap-6">
                 <a href="#" className="flex flex-col items-center group">
@@ -343,7 +343,7 @@ export default function Home() {
         </section>
 
         <section className="h-[20vh] flex items-center justify-center border-t border-white/5 opacity-20">
-          <span className="text-[10px] font-black tracking-[20px] uppercase">© 2026 Netaspan Digital</span>
+          <span className="text-[10px] font-black tracking-[8px] sm:tracking-[20px] uppercase">© 2026 Netaspan Digital</span>
         </section>
       </div>
     </main>
