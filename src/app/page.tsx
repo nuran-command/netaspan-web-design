@@ -221,7 +221,7 @@ export default function Home() {
           <ProjectIsland num="04" category="Branding" title="Netaspan Core" side="right" />
         </div>
 
-        <section id="about" className="relative min-h-screen flex flex-col items-center justify-center py-64 bg-transparent overflow-hidden">
+        <section id="about" className="relative min-h-screen flex flex-col items-center justify-center py-64 bg-transparent">
           {/* Decorative Clouds: LAYERED BACKGROUND */}
           <motion.div
             style={{ y: cloudAboutY1 }}
@@ -253,7 +253,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-200px" }}
+            viewport={{ once: true, margin: "-200px" }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             className="flex flex-col items-center justify-center text-center mb-32 z-20"
           >
@@ -279,7 +279,7 @@ export default function Home() {
           </div>
         </section>
         {/* CONTACT SECTION: THE STACKING REVEAL */}
-        <section id="contact" className="relative h-[150vh] flex flex-col items-center justify-center bg-transparent overflow-hidden">
+        <section id="contact" className="relative h-[150vh] flex flex-col items-center justify-center bg-transparent">
           {/* Section Clouds: LAYERED BACKGROUND */}
           <motion.div
             style={{ y: cloudContactY1, scale: 1.2 }}
