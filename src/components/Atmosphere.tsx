@@ -34,7 +34,7 @@ const GlobalCloudLayer = ({ speed, zIndex, scaleRange, opacityRange, yParallaxRa
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <motion.div style={{ y: yTranslate, zIndex } as unknown as any} className="absolute inset-0 w-full h-full pointer-events-none transform-gpu">
+    <motion.div style={{ y: yTranslate, zIndex } as unknown as any} className="absolute top-0 left-0 w-full h-[500vh] pointer-events-none transform-gpu">
       <div className="flex w-[200%] h-full relative" style={{ animation: `drift ${speed}s linear infinite`, willChange: 'transform' }}>
         {[0, 1].map((s) => (
           <div key={s} className="flex-1 h-full relative">
@@ -124,7 +124,7 @@ export default function Atmosphere({ opacity = 1 }: { opacity?: any }) {
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <motion.div style={{ opacity } as unknown as any} className="fixed inset-0 w-full h-full z-0 pointer-events-none bg-[#0A2540] overflow-hidden transform-gpu">
+    <motion.div style={{ opacity } as unknown as any} className="fixed inset-0 w-full h-full z-0 pointer-events-none bg-[#0A2540] transform-gpu">
       {/* 1. MIST-SYNC BURST LAYER (zIndex 60) - Triggered by Nav */}
       <motion.div
         animate={{ 

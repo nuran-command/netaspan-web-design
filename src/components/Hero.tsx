@@ -18,7 +18,7 @@ export default function Hero() {
   if (!isMounted) return null;
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-full flex items-center justify-center">
       {/* 1. LAYERED CLOUDS (ONE DIRECTION DRIFT) */}
 
       {/* FAR BACK (zIndex 1) */}
